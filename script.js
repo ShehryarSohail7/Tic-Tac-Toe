@@ -65,9 +65,9 @@ function check_winner(player, box_num) {
 function tick_cross_img(player) {
   const tick_cross = document.createElement("img");
   if (player === "X") {
-    tick_cross.src = "/Tic Tac Toe/images/cross.png";
+    tick_cross.src = "/images/cross.png";
   } else if (player === "O") {
-    tick_cross.src = "/Tic Tac Toe/images/circle.png";
+    tick_cross.src = "/images/circle.png";
   }
   tick_cross.alt = "tick_cross";
   tick_cross.style.width = "100%";
