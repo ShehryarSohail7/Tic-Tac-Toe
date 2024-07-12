@@ -257,6 +257,7 @@ reset_button.addEventListener("click", () => {
   playerX = [];
   playerO = [];
   is_there_a_winner = false;
+  pop_up.classList.add("d-none");
 });
 
 pop_up_btn.addEventListener("click", () => {
