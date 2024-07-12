@@ -1,0 +1,11 @@
+.custom-box {
+  background-color: white;
+  border-color: white;
+  height: 33%;
+  width: 32%;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+}
