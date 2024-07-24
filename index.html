@@ -15,7 +15,21 @@
     />
   </head>
   <body>
-    <main class="vh-100 d-flex flex-column justify-content-evenly">
+    <main
+      class="vh-100 d-flex flex-column justify-content-evenly"
+      style="position: relative"
+    >
+      <img
+        src="./images/grid.png"
+        alt="grid"
+        style="
+          position: absolute;
+          right: 24%;
+          bottom: -8%;
+          width: 53%;
+          height: 109%;
+        "
+      />
       <br />
       <div class="d-flex justify-content-center align-items-center">
         <h1 class="text-center m-2">Tic-Tac-Toe</h1>
@@ -74,7 +88,11 @@
         </div>
       </div>
       <br />
-      <div id="reset-button-position" class="d-flex justify-content-center">
+      <div
+        id="reset-button-position"
+        class="d-flex justify-content-center"
+        style="z-index: 1"
+      >
         <button class="btn btn-danger px-4 py-2">Reset</button>
       </div>
       <br />
