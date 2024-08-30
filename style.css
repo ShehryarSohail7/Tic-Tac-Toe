@@ -1,3 +1,7 @@
+main {
+  background-color: gainsboro;
+}
+
 .custom-box {
   background-color: transparent;
   border: 1px solid transparent;
@@ -20,6 +24,33 @@
   height: 95%;
 }
 
+#pop-up {
+  z-index: 2;
+}
+
+.winning-line {
+  z-index: 1;
+  position: absolute;
+  width: 44%;
+  height: 12%;
+}
+
+.diagonal {
+  z-index: 1;
+  position: absolute;
+  width: 51%;
+  height: 12%;
+  transform: rotate(135deg);
+}
+
+.diagonal-2 {
+  z-index: 1;
+  position: absolute;
+  width: 51%;
+  height: 12%;
+  transform: rotate(50deg);
+}
+
 @media (max-width: 768px) {
   .grid {
     right: 0%;
@@ -30,5 +61,19 @@
 
   .custom-box {
     width: 33%;
+  }
+
+  .winning-line {
+    width: 92%;
+  }
+
+  .diagonal {
+    width: 131%;
+    transform: rotate(130deg);
+  }
+
+  .diagonal-2{
+    width: 131%;
+    transform: rotate(60deg);
   }
 }

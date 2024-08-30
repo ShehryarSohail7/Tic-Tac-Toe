@@ -12,6 +12,9 @@ let pop_up = document.querySelector("#pop-up");
 let pop_up_msg = document.querySelector("#pop_up_msg");
 let pop_up_btn = document.querySelector("#pop_up_button");
 
+let winning_line = document.querySelector("#winning-line");
+let diagonal = document.querySelector("#diagonal");
+
 let player = "X";
 
 let playerX = [];
@@ -31,10 +34,51 @@ let winning_combinations = [
 let is_there_a_winner = false;
 
 let found = (test) => {
-  return winning_combinations.some((combination) => {
-    return combination.every((num) => test.includes(num));
-  });
+  for (let i = 0; i < winning_combinations.length; i++) {
+    if (winning_combinations[i].every((num) => test.includes(num))) {
+      return { found: true, index: i };
+    }
+  }
+  return { found: false, index: -1 }; // If no match is found
 };
+
+function match_line(index) {
+  switch (index) {
+    case 0:
+      winning_line.style.top = "15%";
+      winning_line.classList.remove("d-none");
+      break;
+    case 1:
+      winning_line.classList.remove("d-none");
+      break;
+    case 2:
+      winning_line.style.top = "78%";
+      winning_line.classList.remove("d-none");
+      break;
+    case 3:
+      winning_line.style.transform = "rotate(90deg)";
+      winning_line.style.left = "14%";
+      winning_line.classList.remove("d-none");
+      break;
+    case 4:
+      winning_line.style.transform = "rotate(90deg)";
+      winning_line.classList.remove("d-none");
+      break;
+    case 5:
+      winning_line.style.transform = "rotate(90deg)";
+      winning_line.style.left = "42%";
+      winning_line.classList.remove("d-none");
+      break;
+    case 6:
+      diagonal.classList.remove("diagonal");
+      diagonal.classList.add("diagonal-2");
+      diagonal.classList.remove("d-none");
+      break;
+    case 7:
+      diagonal.classList.remove("d-none");
+      break;
+  }
+}
 
 function check_winner(player, box_num) {
   if (is_there_a_winner) {
@@ -42,15 +86,17 @@ function check_winner(player, box_num) {
   }
   if (player === "X") {
     playerX.push(box_num);
-    if (found(playerX)) {
+    if (found(playerX).found) {
       is_there_a_winner = true;
+      match_line(found(playerX).index);
       popping();
       return;
     }
   } else if (player === "O") {
     playerO.push(box_num);
-    if (found(playerO)) {
+    if (found(playerO).found) {
       is_there_a_winner = true;
+      match_line(found(playerO).index);
       popping();
       return;
     }
@@ -76,13 +122,42 @@ function tick_cross_img(player) {
 }
 
 // ------------------------------------pop up-----------------------------------
+function match_msg(pop_up_msg, player) {
+  pop_up_msg.innerHTML = "";
+
+  const textBeforeImg = document.createElement("span");
+  textBeforeImg.textContent = "Player";
+
+  const img = document.createElement("img");
+  img.src = player === "X" ? "images/cross.png" : "images/circle.png";
+  img.alt = `${player} symbol`;
+  img.style.width = "40px";
+  img.style.position = "relative";
+  img.style.top = "-3px";
+  img.style.marginLeft = player === "O" ? "2px" : "auto";
+  img.style.marginRight = player === "O" ? "2px" : "auto";
+
+  const textAfterImg = document.createElement("span");
+  textAfterImg.textContent = "wins!!";
+
+  pop_up_msg.appendChild(textBeforeImg);
+  pop_up_msg.appendChild(img);
+  pop_up_msg.appendChild(textAfterImg);
+}
 
 function popping() {
   pop_up.classList.remove("d-none");
   if (is_there_a_winner === true) {
-    pop_up_msg.innerHTML = `Player ${player} won!!`;
+    if (player === "X") {
+      match_msg(pop_up_msg, "X");
+      pop_up.style.backgroundColor = "#01D0FB";
+    } else {
+      match_msg(pop_up_msg, "O");
+      pop_up.style.backgroundColor = "#FD4755";
+    }
   } else {
     pop_up_msg.innerHTML = `It's a draw :/`;
+    pop_up.style.backgroundColor = "grey";
   }
 }
 
@@ -90,7 +165,6 @@ function popping() {
 let box1_control = false;
 
 box_1.addEventListener("click", () => {
-  console.log(box_1);
   if (box1_control === false) {
     box_1.append(tick_cross_img(player));
     check_winner(player, 1);
@@ -106,7 +180,6 @@ box_1.addEventListener("click", () => {
 let box2_control = false;
 
 box_2.addEventListener("click", () => {
-  console.log(box_2);
   if (box2_control === false) {
     box_2.append(tick_cross_img(player));
     check_winner(player, 2);
@@ -122,7 +195,6 @@ box_2.addEventListener("click", () => {
 let box3_control = false;
 
 box_3.addEventListener("click", () => {
-  console.log(box_3);
   if (box3_control === false) {
     box_3.append(tick_cross_img(player));
     check_winner(player, 3);
@@ -138,7 +210,6 @@ box_3.addEventListener("click", () => {
 let box4_control = false;
 
 box_4.addEventListener("click", () => {
-  console.log(box_4);
   if (box4_control === false) {
     box_4.append(tick_cross_img(player));
     check_winner(player, 4);
@@ -154,7 +225,6 @@ box_4.addEventListener("click", () => {
 let box5_control = false;
 
 box_5.addEventListener("click", () => {
-  console.log(box_5);
   if (box5_control === false) {
     box_5.append(tick_cross_img(player));
     check_winner(player, 5);
@@ -170,7 +240,6 @@ box_5.addEventListener("click", () => {
 let box6_control = false;
 
 box_6.addEventListener("click", () => {
-  console.log(box_6);
   if (box6_control === false) {
     box_6.append(tick_cross_img(player));
     check_winner(player, 6);
@@ -186,7 +255,6 @@ box_6.addEventListener("click", () => {
 let box7_control = false;
 
 box_7.addEventListener("click", () => {
-  console.log(box_7);
   if (box7_control === false) {
     box_7.append(tick_cross_img(player));
     check_winner(player, 7);
@@ -202,7 +270,6 @@ box_7.addEventListener("click", () => {
 let box8_control = false;
 
 box_8.addEventListener("click", () => {
-  console.log(box_8);
   if (box8_control === false) {
     box_8.append(tick_cross_img(player));
     check_winner(player, 8);
@@ -218,7 +285,7 @@ box_8.addEventListener("click", () => {
 let box9_control = false;
 
 box_9.addEventListener("click", () => {
-  console.log(box_9);
+
   if (box9_control === false) {
     box_9.append(tick_cross_img(player));
     check_winner(player, 9);
@@ -252,6 +319,15 @@ reset_button.addEventListener("click", () => {
   box7_control = false;
   box8_control = false;
   box9_control = false;
+
+  diagonal.classList.add("d-none");
+  diagonal.classList.add("diagonal");
+  diagonal.classList.remove("diagonal-2");
+  winning_line.classList.add("d-none");
+  winning_line.style.transform = "rotate(0deg)";
+  winning_line.style.left = "auto";
+  winning_line.style.top = "auto";
+
 
   player = "X";
   playerX = [];
