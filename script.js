@@ -56,17 +56,15 @@ function match_line(index) {
       winning_line.classList.remove("d-none");
       break;
     case 3:
-      winning_line.style.transform = "rotate(90deg)";
-      winning_line.style.left = "14%";
+      winning_line.classList.add("left-vertical");
       winning_line.classList.remove("d-none");
       break;
     case 4:
-      winning_line.style.transform = "rotate(90deg)";
+      winning_line.classList.add("vertical");
       winning_line.classList.remove("d-none");
       break;
     case 5:
-      winning_line.style.transform = "rotate(90deg)";
-      winning_line.style.left = "42%";
+      winning_line.classList.add("right-vertical");
       winning_line.classList.remove("d-none");
       break;
     case 6:
@@ -324,8 +322,9 @@ reset_button.addEventListener("click", () => {
   diagonal.classList.add("diagonal");
   diagonal.classList.remove("diagonal-2");
   winning_line.classList.add("d-none");
-  winning_line.style.transform = "rotate(0deg)";
-  winning_line.style.left = "auto";
+  winning_line.classList.remove("left-vertical");
+  winning_line.classList.remove("right-vertical");
+  winning_line.classList.remove("vertical");
   winning_line.style.top = "auto";
 
 

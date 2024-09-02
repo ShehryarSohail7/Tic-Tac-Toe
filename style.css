@@ -31,7 +31,7 @@ main {
 .winning-line {
   z-index: 1;
   position: absolute;
-  width: 44%;
+  width: 38%;
   height: 12%;
 }
 
@@ -51,6 +51,20 @@ main {
   transform: rotate(50deg);
 }
 
+.vertical {
+  transform: rotate(90deg);
+}
+
+.left-vertical {
+  transform: rotate(90deg);
+  left: 17%;
+}
+
+.right-vertical {
+  transform: rotate(90deg);
+  left: 45%;
+}
+
 @media (max-width: 768px) {
   .grid {
     right: 0%;
@@ -64,7 +78,7 @@ main {
   }
 
   .winning-line {
-    width: 92%;
+    width: 94%;
   }
 
   .diagonal {
@@ -72,8 +86,22 @@ main {
     transform: rotate(130deg);
   }
 
-  .diagonal-2{
+  .diagonal-2 {
     width: 131%;
     transform: rotate(60deg);
+  }
+
+  .left-vertical {
+    left: -42%;
+    width: 125%;
+  }
+
+  .right-vertical {
+    left: 17%;
+    width: 125%;
+  }
+
+  .vertical {
+    width: 125%;
   }
 }
